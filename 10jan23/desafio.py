@@ -38,8 +38,3 @@ class CPF:
 meu_cpf = CPF(1908424079)
 
 print(meu_cpf.valida_cpf())
-
-
-
-git config --global user.email "you@example.com"
-  git config --global user.name "Your Name"
