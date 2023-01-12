@@ -19,7 +19,7 @@ class CPF:
         digito_1 = soma % 11 if (soma % 11) < 2 else 11 - (soma % 11)
 
         if digito_1 != int(cpf_str[9]):
-            return f'\033[31mDIGITO VERIFICADOR INVÁLIDO\033[m'
+            return '\033[31mDIGITO VERIFICADOR INVÁLIDO\033[m'
 
         soma = 0
         mult = 11
@@ -30,9 +30,9 @@ class CPF:
         digito_2 = soma % 11 if (soma % 11) < 2 else 11 - (soma % 11)
 
         if digito_2 != int(cpf_str[10]):
-            return f'\033[31mDIGITO VERIFICADOR INVÁLIDO\033[m'
+            return '\033[31mDIGITO VERIFICADOR INVÁLIDO\033[m'
 
-        return f'\033[32mCPF VÁLIDO\033[m'
+        return '\033[32mCPF VÁLIDO\033[m'
 
 
 meu_cpf = CPF(1908424079)
