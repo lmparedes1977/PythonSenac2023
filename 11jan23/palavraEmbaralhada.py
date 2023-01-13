@@ -8,7 +8,7 @@ lista_palavras = [palavra.rstrip().upper() for palavra in lista_palavras]
 palavras.close()
 num_palavra = randint(0, len(lista_palavras)-1)
 palavra = list(lista_palavras[num_palavra])
-print(palavra)
+
 shuffle(palavra)
 palavra_embaralhada = ' '.join(palavra)
 
@@ -22,7 +22,7 @@ print()
 
 
 for i in range(6):
-    palpite = input('Digite seu palpite: ').upper().strip()
+    palpite = input(f'Digite seu palpite [{6-i} tentativas]: ').upper().strip()
     if palpite == lista_palavras[num_palavra]:
         print(f'BINGO! A palavra é {lista_palavras[num_palavra]}')
         break

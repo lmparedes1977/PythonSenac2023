@@ -1,0 +1,2 @@
+class CPFException(Exception):
+    pass
