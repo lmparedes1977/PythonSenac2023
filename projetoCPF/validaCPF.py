@@ -1,12 +1,13 @@
-from CPF import *
+from Cpf import *
 
 
 continuar = True
+
 while continuar:
     try:
-        meu_cpf = CPF(input("Digite o CPF: "))
+        meu_cpf = Cpf(input("Digite o CPF: "))
         valida = meu_cpf.valida_cpf()
-    except CPFException as e:
+    except CpfException as e:
         print(e)
     else:
         print(valida)
@@ -17,5 +18,6 @@ while continuar:
                 'INVALIDO. DESEJA CONTUNAR: [S/N]').upper().strip()[0]
         if continua == 'N':
             continuar = False
-else:
-    print('FIM DO PROGRAMA')
+
+
+print('FIM DO PROGRAMA')

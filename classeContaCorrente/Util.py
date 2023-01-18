@@ -1,20 +1,28 @@
 from datetime import datetime
-from CpfException import *
+
+CAMINHO = './arquivos/'
 
 
-class Cpf:
-    def __init__(self, cpf) -> None:
-        self.__cpf = cpf.replace('.', '').replace('-', '')
-        if len(self.__cpf) < 11 or not self.__cpf.isnumeric():
-            with open("./cpf_invalido.log", 'a', encoding='utf-8') as log:
-                log.write(
-                    f'ENTRADA DO USUARIO {self.__cpf} INVALIDA - {datetime.now()}\n')
-            raise CpfException(
-                'CPF INVÁLIDO. NECESSÁRIO 11 NÚMEROS (NÃO TODOS IGUAIS), SEM LETRAS\n')
+class Util:
 
-    def valida_cpf(self):
+    #     __next_PF = '10000'
+    #     __next_PJ = '50000'
+
+    #     def __calcular_dv(self):
+    #         mult = 10
+    #         soma = 0
+    #         for n in self.__conta_base:
+    #             soma += int(n) * mult
+    #             mult -= 1
+    #         resto = soma % 11
+    #         return resto if resto < 2 else 11 - resto
+
+    def valida_cpf(self, id):
         '''Função para testar se todos os números do cpf são iguais,
-        e se o dígito verificador é válido'''
+           e se o dígito verificador é válido
+        '''
+
+        self.__cpf = id
 
         # verificação se todos os dígitos são iguais
 
@@ -41,7 +49,7 @@ class Cpf:
             with open("./cpf_invalido.log", 'a', encoding='utf-8') as log:
                 log.write(
                     f'PRIMEIRO DÍGITO DO CPF {self.__cpf} INVALIDO - {datetime.now()}\n')
-            raise CpfException('\033[31mDIGITO VERIFICADOR INVÁLIDO\033[m')
+            return False
 
         # verificação do segundo algarismo do dígito
 
@@ -57,10 +65,14 @@ class Cpf:
             with open("./cpf_invalido.log", 'a', encoding='utf-8') as log:
                 log.write(
                     f'SEGUNDO DÍGITO DO CPF {self.__cpf} INVALIDO - {datetime.now()}\n')
-            raise CpfException('\033[31mDIGITO VERIFICADOR INVÁLIDO\033[m')
+            return False
 
         # retorno caso cpf válido
 
         with open("./cpf_valido.txt", 'a', encoding='utf-8') as valido:
             valido.write(f'CPF {self.__cpf} OK - {datetime.now()}\n')
-        return '\033[32mCPF VÁLIDO\033[m'
+        return True
+
+
+class CpfException(Exception):
+    pass
