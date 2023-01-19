@@ -1,25 +1,43 @@
-
+from DB import *
 from Util import *
 
 
-class Login(Util):
-    id_cliente = 1
-    tipo_cliente = ''
+class Login(Util, DB):
+
+    __tipo_cliente = ''
+    __cliente_novo = False
+    __id = ''
 
     def __init__(self):
         pass
 
     def login(self, id):
+
         self.__id = id.replace('.', '').replace('-', '')
+
         if len(self.__id) <= 11:
             if self.valida_cpf(self.__id):
-                Login.tipo_cliente = 'clientePF'
-                with open('cadastro_geral.txt', 'r') as arq:
-                    arq.readlines()
-                    arq = [linha.rstrip().split() for linha in arq]
-                    if self.__if in arq:
+                Login.__tipo_cliente = 'clientePF'
+                Login.__id = self.__id
+                lista_clientes = self.consultar_lista_clientes_pf()
+                if self.__id in lista_clientes:
+                    print("Bem vindo Fulano")
+                    Login.__cliente_novo = False
+                else:
+                    Login.__cliente_novo = True
 
         if len(self.__id) == 14:
-            Login.tipo_cliente = 'clientePJ'
-        else:
+            Login.__tipo_cliente = 'clientePJ'
+            Login.__id = self.__id
+            lista_clientes = self.consultar_lista_clientes_pj()
+            if self.__id in lista_clientes:
+                print("Bem vindo Fulano")
+                Login.__cliente_novo = False
+            else:
+                Login.__cliente_novo = True
+
+        if len(self.__id) != 14 and len(self.__id) != 11:
             raise Exception('ENTRADA INVÁLIDA')
+
+    def get_id(self):
+        return Login.__id

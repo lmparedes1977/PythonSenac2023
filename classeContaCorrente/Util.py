@@ -5,8 +5,9 @@ CAMINHO = './arquivos/'
 
 class Util:
 
-    #     __next_PF = '10000'
-    #     __next_PJ = '50000'
+    __nr_cadastro = 0
+    __next_PF = '10000'
+    __next_PJ = '50000'
 
     #     def __calcular_dv(self):
     #         mult = 10
