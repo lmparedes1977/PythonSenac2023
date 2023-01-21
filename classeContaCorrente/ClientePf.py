@@ -1,14 +1,14 @@
-from Cliente import *
+
 from Util import *
 from DB import *
 
 
-class ClientePf(Cliente, DB):
+class ClientePf():
 
-    def __init__(self, id, name, adress, acount_nr=DB.get) -> None:
-        Cliente.__init__(self, id)
+    def __init__(self, id, name, adress, acount_nr=Util.get_acount()) -> None:
+        self.__id = id
         self.__name = name
         self.__adress = adress
         self.__acount_nr = acount_nr
-        self.registrar_lista_clientes_pf(
-            self.__id, self.__namename, self.__adress, self.__acount_nr)
+        DB.set_clients_pf_list(
+            self.__id, self.__name, self.__adress, self.__acount_nr)

@@ -18,10 +18,4 @@ print(F'{BANCO:^35}')
 print('='*35)
 print(F'{LOGIN:^35}\n')
 
-id = Login()
-cliente = ''
-tipo_cliente = input('DIGITE O CPF/CNPJ: ')
-if id.login(tipo_cliente) == 'clientePF':
-    print("SEJA BEM VINDO!".center(35))
-    cliente = ClientePf(id.get_id(), input(
-        "Nome completo:"), input("Endereço"))
+cliente = Login()
