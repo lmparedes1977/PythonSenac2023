@@ -20,7 +20,7 @@ class Cnpj:
         if len(set(list(self.__cnpj))) == 1:  # verificação se todos os dígitos são iguais
             msg = 'CNPJ INVALIDO (DÍGITOS IGUAIS)'
             Arquivo.registra_erro(self.__cnpj, msg)
-            raise CnpjException(f'\033[31m{msg}\033[m')
+            raise CnpjException(f'\033[31m{msg}\033[m\n')
 
         cnpj_str = list(self.__cnpj)
 
@@ -38,7 +38,7 @@ class Cnpj:
         if digito_1 != int(cnpj_str[12]):
             msg = 'PRIMEIRO DIGITO VERIFICADOR INVÁLIDO'
             Arquivo.registra_erro(self.__cnpj, msg)
-            raise CnpjException(f'\033[31m{msg}\033[m')
+            raise CnpjException(f'\033[31m{msg}\033[m\n')
 
         soma = 0   # verificação do segundo algarismo do dígito
         mult1 = 6
@@ -54,7 +54,7 @@ class Cnpj:
         if digito_1 != int(cnpj_str[13]):
             msg = 'SEGUNDO DIGITO VERIFICADOR INVÁLIDO'
             Arquivo.registra_erro(self.__cnpj, msg)
-            raise CnpjException(f'\033[31m{msg}\033[m')
+            raise CnpjException(f'\033[31m{msg}\033[m\n')
 
         Arquivo.registra_sucesso(self.__cnpj)
 
