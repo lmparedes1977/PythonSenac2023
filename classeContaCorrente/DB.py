@@ -1,56 +1,81 @@
 from datetime import datetime
+import json
 
 
 class DB:
 
-    @staticmethod
-    def set_clients_pf_list(id, name, adress, acount_nr):
-        '''Doc'''
-        with open('pf.txt', 'a') as arq:
-            arq.write(f'{id:<20} {name:<20} {adress:<40} {acount_nr:<20}\n')
+    __PF = 'pf.json'
+    __PJ = 'pj.json'
 
-    @staticmethod
-    def set_clients_pj_list(id, name, adress, acount_nr):
-        '''Doc'''
-        with open('pj.txt', 'a') as arq:
-            arq.write(f'{id:<20} {name:<20} {adress:<40} {acount_nr:<20}\n')
+    def fetch_data(type_client):
 
-    @staticmethod
-    def get_clients_pf_list():
-        '''Doc'''
-        lista = []
-        with open('pf.txt', 'r') as arq:
-            arq.readlines()
-            lista = [linha.rstrip().split() for linha in arq]
-        return lista
+        # @staticmethod
+        # def set_clients_pf_list(id, name, adress, account_nr):
+        #     '''Doc'''
+        #     clientes_pf = {}
+        #     with open(DB.__TODOS_PF, encoding='utf-8') as file:
+        #         json.dump(file, clientes_pf)
+        #     clientes_pf['pf'].append({'id': id, 'name': name,
+        #                               'adress': adress, 'account_nr': account_nr,
+        #                               'balance': 0, 'bank_st': []})
+        #     with open(DB.__TODOS_PF, 'w', encoding='utf-8') as file:
+        #         file.write(json.load(clientes_pf, ensure_ascii=False))
 
-    @staticmethod
-    def get_clients_pj_list():
-        '''Doc'''
-        with open('pj.txt', 'r') as arq:
-            arq.readlines()
-            arq = [linha.rstrip().split() for linha in arq]
-            return arq
+        # @staticmethod
+        # def set_clients_pj_list(id, name, adress, account_nr):
+        #     '''Doc'''
+        #     clientes_pj = {}
+        #     with open(DB.__TODOS_PJ, encoding='utf-8') as file:
+        #         json.dump(file, clientes_pj)
+        #     clientes_pj['pf'].append({'id': id, 'name': name,
+        #                               'adress': adress, 'account_nr': account_nr,
+        #                               'balance': 0, 'bank_st': []})
+        #     with open(DB.__TODOS_PJ, 'w', encoding='utf-8') as file:
+        #         file.write(json.load(clientes_pj, ensure_ascii=False))
 
-    @staticmethod
-    def set_client_pf(self, id):
-        '''Doc'''
-        pass
+        # @staticmethod
+        # def get_clients_pf_list():
+        #     '''Doc'''
+        #     clientes_pf = {}
+        #     with open(DB.__TODOS_PJ, encoding='utf-8') as file:
+        #         json.dump(file, clientes_pf)
+        #     return clientes_pf
 
-    @staticmethod
-    def set_client_pj(self, id):
-        '''Doc'''
-        pass
+        # @staticmethod
+        # def get_clients_pj_list():
+        #     '''Doc'''
+        #     clientes_pj = {}
+        #     with open(DB.__TODOS_PJ, encoding='utf-8') as file:
+        #         json.dump(file, clientes_pj)
+        #     return clientes_pj
 
-    @staticmethod
-    def get_cliente_pf(self, id):
-        '''Doc'''
-        pass
+        # @staticmethod
+        # def deposit_pf(self, amount):
+        #     '''Doc'''
+        #     clientes_pf = {}
+        #     with open(DB.__TODOS_PF, encoding='utf-8') as file:
+        #         json.dump(file, clientes_pf)
+        #     clientes_pf['pf'].append({'id': id, 'name': name,
+        #                               'adress': adress, 'account_nr': account_nr,
+        #                               'balance': 0, 'bank_st': []})
+        #     with open(DB.__TODOS_PF, 'w', encoding='utf-8') as file:
+        #         file.write(json.load(clientes_pf, ensure_ascii=False))
+        #     pass
 
-    @staticmethod
-    def get_cliente_pj(self, id):
-        '''Doc'''
-        pass
+        # @staticmethod
+        # def set_client_pj(self, id):
+        #     '''Doc'''
+        #     pass
+
+        # @staticmethod
+        # def get_cliente_pf(self, id):
+        #     '''Doc'''
+        #     pass
+
+        # @staticmethod
+        # def get_cliente_pj(self, id):
+        #     '''Doc'''
+        #     pass
 
     def registra_sucesso_cpf(self):
         '''registro das entradas válidas'''

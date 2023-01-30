@@ -45,7 +45,6 @@ root.resizable(width=False, height=False)
 root.iconbitmap('senac.ico')
 str_entrada = tk.StringVar()
 fundo = tk.Label(root, image=imagem, )
-
 label = tk.Label(root, text='CPF VALIDATOR TABAJARA',
                  font=("Arial", 20), bg='orange')
 entry = tk.Entry(root, font=("Arial Bold", 30),
