@@ -1,38 +1,22 @@
 from cpf import *
+from arquivo import *
 import time
-import json
 
-def limpa_arquivo():
-    """Apaga registro em arquivo JSON para não haver redundância de resposta"""
-    entrada = {'cpf': ''}                   
-    with open('entrada.json', 'w') as arq:
-        arq.write(json.dumps(entrada))
 
-def salva_retorno(ret): 
-    """Registra retorno de validação de CPF em arquivo JSON."""
-    msg = str(ret)  
-    saida = {'msg': msg }                   
-    with open('retorno.json', 'w', encoding='utf-8') as arq:
-        arq.write(json.dumps(saida, ensure_ascii=False))
-
-entrada = ""
+"""Bloco de execução do programa SERVIDOR"""
 while True:
     try:        
-        with open('entrada.json') as arq:
-            entrada = json.load(arq)   # var entrada recebe JSON
-            if entrada['cpf']:
-                cpf = Cpf.recebe_cpf(entrada['cpf'])
-                retorno =  cpf.valida_cpf()
-                print(f'{entrada["cpf"]} => {retorno}')   # impressão de validação em console                
-                salva_retorno(retorno)                                        
-                limpa_arquivo()
-                cpf.__del__()                          
+        entrada = Arquivo.le_json(Arquivo.JSON_ENTRADA)   # Chama função de leitura de arquivo JSON de entrada do usuário via GUI
+        if entrada['cpf']:
+            cpf = Cpf.recebe_cpf(entrada['cpf'])   # Instanciação do objeto cpf
+            retorno =  cpf.valida_cpf()      # Retorno de valiação dos dídigos verificadores
+            print(f'{entrada["cpf"]} => {retorno}')   # Impressão de validação em console                
+            Arquivo.escreve_json(Arquivo.JSON_RETORNO, {'msg': retorno })   # Chama função gravação de retorno em arquivo JSON
+            Arquivo.escreve_json(Arquivo.JSON_ENTRADA, {'cpf': ''})  # Chama função de "limpeza" de entrada para nova consulta (caso sucesso)
     except CpfException as e:  
-        salva_retorno(e)        
-        print(f'{entrada["cpf"]} => {e}')  # impressão de excessão em console
-        limpa_arquivo()
-
-    time.sleep(0.5)    
-    
-
+        Arquivo.escreve_json(Arquivo.JSON_RETORNO, {'msg': str(e) })   # Chama função para gravação de erro em arquivo JSON
+        print(f'{entrada["cpf"]} => {e}')  # Impressão de excessão em console
+        Arquivo.escreve_json(Arquivo.JSON_ENTRADA, {'cpf': ''})   # Chama função de "limpeza" de entrada para nova consulta (caso erro)
+     
+    time.sleep(0.2)
 
