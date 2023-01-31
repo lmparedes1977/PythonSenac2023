@@ -1,4 +1,16 @@
 {
     "nextAccount": 10000,
-    "pf": []
+    "nextId": 1,
+    "clientes": [
+        {
+            "id": 1,
+            "cpf": "",
+            "nome": "",
+            "endereco": "",
+            "nr_conta": "",
+            "senha": 0,
+            "saldo": 0,
+            "extrato": []
+        }
+    ]
 }
