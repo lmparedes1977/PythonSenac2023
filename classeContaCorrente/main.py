@@ -1,4 +1,4 @@
-from classes import Login
+from classes import *
 
 BANCO = 'BANCO SENAC'
 LOGIN = 'LOGIN'
@@ -7,4 +7,6 @@ print(F'{BANCO:^35}')
 print('='*35)
 print(F'{LOGIN:^35}\n')
 
-cliente = Login()
+
+pf = ClientePf.cadastra_cliente_pf(input('Digite o cpf: '), input(
+    "digite o nome: "), input("Digite um endereço: "), input('Digite a senha: '))

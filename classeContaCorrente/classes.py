@@ -7,97 +7,69 @@ class Login():
 
     @staticmethod
     def login(conta, senha):
+        pass
 
     def get_id(self):
-        return Login.__id
+        pass
 
     @staticmethod
     def get_tipo_cliente():
-        return Login.__tipo_cliente
+        pass
 
 
 class ClientePf():
 
-    def __init__(self, cpf: str, nome: str, endereco: str, nr_conta: str, senha: str) -> None:
-        self.__cpf = cpf
-        self.__nome = nome
-        self.endreco = endereco
-        self.__nr_conta = nr_conta
-        self.__senha = senha
+    def __init__(self, id: str) -> None:
+        self.__id = id
+
+    @staticmethod
+    def cadastra_cliente_pf(cpf, nome, endereco, senha):
+        cliente = {'id': Util.next_id(), 'cpf': cpf, 'nome': nome, 'endereco': endereco,
+                   'nr_conta': Util.next_account_pf(), 'senha': senha, 'saldo': 0, 'extrato': []}
+        cadastro = DB.le_json(DB.CLIENTES_PF)
+        cadastro['clientes']: list.append(cliente)
+        DB.escreve_json(DB.CLIENTES_PF, cadastro)
+        return ClientePf.login_pf(cliente['id'])
 
     @classmethod
-    def cliente_logado(cls, cpf, nome, endereco, nr_conta, )
+    def login_pf(cls, id):
+        return cls(id)
 
 
 class ClientePj():
 
-    def __init__(self, cnpj: str, nome: str, endereco: str, nr_conta: str, senha: str) -> None:
-        self.__cnpj = cnpj
-        self.__nome = nome
-        self.__endreco = endereco
-        self.__nr_conta = nr_conta
-        self.__senha = senha
+    def __init__(self, id: str) -> None:
+        self.__id = id
+
+    @staticmethod
+    def cadastra_cliente_pj(cnpj, nome, endereco, senha):
+        cliente = {'id': Util.next_id(), 'cnpj': cnpj, 'nome': nome, 'endereco': endereco,
+                   'nr_conta': Util.next_account_pj(), 'senha': senha, 'saldo': 0, 'extrato': []}
+        cadastro = DB.le_json(DB.CLIENTES_PJ)
+        cadastro['clientes']: list.append(cliente)
+        DB.escreve_json(DB.CLIENTES_PJ, cadastro)
+        return ClientePj.login_pj(cliente['id'])
+
+    @classmethod
+    def login_pj(cls, id):
+        return cls(id)
 
 
 class DB:
 
-    __CLIENTES_PF = 'pf.json'
-    __CLIENTES_PJ = 'pj.json'
+    CLIENTES_PF = 'pf.json'
+    CLIENTES_PJ = 'pj.json'
+    NEXT = 'next.json'
 
     @staticmethod
-    def cria_cliente_pf(cpf, nome, endereco, senha):
-        '''Inclui novo Cliente no DB (arquivo JSON __CLIENTES_PF)'''
-        clientes = {}
-        with open(DB.__CLIENTES_PF, encoding='utf-8') as arq:
-            json.dump(arq, clientes)
-        clientes['clientes'].append({'id': clientes['nextId'], 'cpf': cpf, 'nome': nome,
-                                     'endereco': endereco, 'nr_conta': clientes['nextAccount'],
-                                     'senha': senha})
-        clientes['nextId'], clientes['nextAccount'] += 1, 1
-        with open(DB.__CLIENTES_PF, 'w', encoding='utf-8') as file:
-            file.write(json.load(clientes, ensure_ascii=False))
+    def le_json(arquivo):
+        with open(arquivo, encoding='utf-8') as arq:
+            return json.load(arq)
 
     @staticmethod
-    def set_clients_pj_list(cnpj, nome, endereco, senha):
-        '''Inclui novo Cliente no DB (arquivo JSON __CLIENTES_PJ)'''
-        clientes = {}
-        with open(DB.__CLIENTES_PJ, encoding='utf-8') as arq:
-            json.dump(arq, clientes)
-        clientes['clientes'].append({'id': clientes['nextId'], 'cnpf': cnpj, 'nome': nome,
-                                     'endereco': endereco, 'nr_conta': clientes['nextAccount'],
-                                     'senha': senha})
-        clientes['nextId'], clientes['nextAccount'] += 1, 1
-        with open(DB.__CLIENTES_PJ, 'w', encoding='utf-8') as file:
-            file.write(json.load(clientes, ensure_ascii=False))
-
-    @staticmethod
-    def get_clients_pf_list():
-        '''Doc'''
-        clientes_pf = {}
-        with open(DB.__CLIENTES_PJ, encoding='utf-8') as file:
-            json.dump(file, clientes_pf)
-        return clientes_pf
-
-    @staticmethod
-    def get_clients_pj_list():
-        '''Doc'''
-        clientes_pj = {}
-        with open(DB.__CLIENTES_PJ, encoding='utf-8') as file:
-            json.dump(file, clientes_pj)
-        return clientes_pj
-
-    @staticmethod
-    def deposit_pf(self, amount):
-        '''Doc'''
-        clientes_pf = {}
-        with open(DB.__CLIENTES_PF, encoding='utf-8') as file:
-            json.dump(file, clientes_pf)
-        clientes_pf['pf'].append({'id': id, 'name': name,
-                                  'adress': adress, 'account_nr': account_nr,
-                                  'balance': 0, 'bank_st': []})
-        with open(DB.__CLIENTES_PF, 'w', encoding='utf-8') as file:
-            file.write(json.load(clientes_pf, ensure_ascii=False))
-        pass
+    def escreve_json(arquivo, dado):
+        with open(arquivo, 'w', encoding='utf-8') as arq:
+            arq.write(json.dumps(dado, ensure_ascii=False))
 
     @staticmethod
     def set_client_pj(self, id):
@@ -152,8 +124,9 @@ class Servicos:
 class Util():
 
     @staticmethod
-    def __calcular_dv(account_nr):
-        mult = 10
+    def calcula_dv(account_nr):
+        account = list(str(account_nr))
+        mult = len(account)
         soma = 0
         for n in account_nr:
             soma += int(n) * mult
@@ -162,10 +135,28 @@ class Util():
         return resto if resto < 2 else 11 - resto
 
     @staticmethod
-    def get_acount():
+    def next_id():
+        arquivo = DB.le_json(DB.NEXT)
+        id = arquivo['next_id']
+        arquivo['next_id'] += 1
+        DB.escreve_json(DB.NEXT, arquivo)
+        return id
 
-        Util.__next_PF += 1
-        return Util.__next_PF
+    @staticmethod
+    def next_account_pf():
+        arquivo = DB.le_json(DB.NEXT)
+        account = arquivo['next_account_pf']
+        arquivo['next_account_pf'] += 1
+        DB.escreve_json(DB.NEXT, arquivo)
+        return account
+
+    @staticmethod
+    def next_account_pj():
+        arquivo = DB.le_json(DB.NEXT)
+        account = arquivo['next_account_pj']
+        arquivo['next_account_pj'] += 1
+        DB.escreve_json(DB.NEXT, arquivo)
+        return account
 
     def valida_cpf(self, id):
         '''testar todos os números iguais,
