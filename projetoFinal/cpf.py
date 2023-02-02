@@ -13,7 +13,7 @@ class Cpf:
         """ Validações inciais da entrada de dado (nr de dígitos numéricos,
             presença de caracteres não numéricos direfentes de ponto e hifen,
             entrada com 11 dígitos iguais.
-            Retorna chamada da classmathod gera_objeto """
+            Retorna chamada da classmathod gera_objeto."""
         recebido = cpf.replace('.', '').replace('-', '')
         # instancia objeto Arquivo com entrada já "limpa"
         reg = Arquivo.gera_registro(recebido)

@@ -1,3 +1,24 @@
 {
-    "clientes": []
+  "clientes": [
+    {
+      "id": 4,
+      "cnpj": "eseff",
+      "nome": "38873",
+      "endereco": "sefefe",
+      "nr_conta": 50000,
+      "senha": "38484",
+      "saldo": 0,
+      "extrato": []
+    },
+    {
+      "id": 5,
+      "cnpj": "31831",
+      "nome": "sefef",
+      "endereco": "38181",
+      "nr_conta": "50001-1",
+      "senha": "35848",
+      "saldo": 0,
+      "extrato": []
+    }
+  ]
 }

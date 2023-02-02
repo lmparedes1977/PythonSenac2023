@@ -65,4 +65,5 @@ class Arquivo:
     def __del__(self) -> str:
         """Método mágico para impressão de log no console quando objeto é deletado"""
         print(
-            f'Gravação efetuada com sucesso em {time.strftime("%d/%m/%Y %H:%M:%S", time.gmtime(time.time() - 10800))}')
+            f'Gravação efetuada com sucesso em \
+                {time.strftime("%d/%m/%Y %H:%M:%S", time.gmtime(time.time() - 10800))}')
