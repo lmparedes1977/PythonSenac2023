@@ -1,0 +1,14 @@
+{
+    "clientes": [
+        {
+            "id": 3,
+            "cpf": "13518",
+            "nome": "dfsf",
+            "endereco": "efef",
+            "nr_conta": 10002,
+            "senha": "2134",
+            "saldo": 0,
+            "extrato": []
+        }
+    ]
+}

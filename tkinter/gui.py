@@ -1,9 +1,9 @@
 import tkinter as tk
+import math
 
 root = tk.Tk()
 root.title('Python Labs')
 root.geometry('500x400')
-
 
 
 def boas_vindas():
@@ -28,17 +28,14 @@ entr = tk.Entry(root)
 def recebe_e_exibe():
     entr.pack()
     lbl.pack()
-
     btn = tk.Button(root, text='FECHAR JANELA', bg='gray',
                     font='Arial', command=exibe_entrada)
-
     btn.pack()
-
-
-def contagem_regressiva
 
 
 # boas_vindas()
 # fecha_com_button()
 # recebe_e_exibe()
-root.mainloop()
+# root.mainloop()
+
+print(pow(-2, 0.5))

@@ -1,0 +1,6 @@
+{"operacao": "5 / 1", "resultado": "5.0", "data e hora": "07/02/2023 20:36:36"}
+{"operacao": "5 ** 5", "resultado": "3125", "data e hora": "07/02/2023 20:37:03"}
+{"operacao": "5 ** 7", "resultado": "78125", "data e hora": "07/02/2023 20:51:00"}
+{"operacao": "5 - 3", "resultado": "2", "data e hora": "07/02/2023 21:13:19"}
+{"operacao": "9 / 3", "resultado": "3.0", "data e hora": "07/02/2023 21:13:58"}
+{"operacao": "1 * 4", "resultado": "4", "data e hora": "07/02/2023 21:29:33"}
