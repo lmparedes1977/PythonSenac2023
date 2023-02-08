@@ -1,0 +1,17 @@
+{"operacao": "5 / 0", ""erro":"não é possível dividir por zero", "data e hora": "07/02/2023 20:53:21"}
+{"operacao": "5 / 0", ""erro":"não é possível dividir por zero", "data e hora": "07/02/2023 20:54:10"}
+{"operacao": "5 / 0", ""erro":"não é possível dividir por zero", "data e hora": "07/02/2023 20:55:08"}
+{"operacao": "5 / 0", ""erro":"não é possível dividir por zero", "data e hora": "07/02/2023 20:57:08"}
+{"operacao": "a / 5", invalid literal for int() with base 10: 'a', "data e hora": "07/02/2023 20:57:58"}
+{"operacao": "5 / b", invalid literal for int() with base 10: 'b', "data e hora": "07/02/2023 20:59:17"}
+{"operacao": "5 9 b", invalid literal for int() with base 10: 'b', "data e hora": "07/02/2023 20:59:30"}
+{"operacao": "5 9 7", "erro": "operador inválido", "data e hora": "07/02/2023 20:59:41"}
+{"operacao": "5 97", "erro": "entrada sem espaços entre operação e operandos", "data e hora": "07/02/2023 20:59:49"}
+{"operacao": "5 + e", invalid literal for int() with base 10: 'e', "data e hora": "07/02/2023 21:01:27"}
+{"operacao": "5 + e", invalid literal for int() with base 10: 'e', "data e hora": "07/02/2023 21:05:19"}
+{"operacao": "5 + e", invalid literal for int() with base 10: 'e', "data e hora": "07/02/2023 21:06:15"}
+{"operacao": "5 + e", invalid literal for int() with base 10: 'e', "data e hora": "07/02/2023 21:06:23"}
+{"operacao": "5 + e", invalid literal for int() with base 10: 'e', "data e hora": "07/02/2023 21:13:13"}
+{"operacao": "5 + e", invalid literal for int() with base 10: 'e', "data e hora": "07/02/2023 21:13:47"}
+{"operacao": "4 d", "erro": "entrada sem espaços entre operação e operandos", "data e hora": "07/02/2023 21:14:06"}
+{"operacao": "meu nome é b", invalid literal for int() with base 10: 'meu', "data e hora": "07/02/2023 21:29:43"}
