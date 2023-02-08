@@ -46,8 +46,7 @@ lbl_2 = tk.Label(root, text='Digite apenas números OU formato tracicional XXX.X
 str_entrada = tk.StringVar()  # objeto StringVar que recebe entrada do usuário                    
 entry = tk.Entry(root, font=("Arial Bold", 30),  
                 width=13, textvariable=str_entrada)   # campo de entrada de dados pelo usuário
-btn_validar = tk.Button(root, text='VALIDAR',
-                        command=cpf_io, font=('Arial', 20), bg='light green')  # botão solicitação de validação 
+btn_validar = tk.Button(root, text='VALIDAR', command=cpf_io, font=('Arial', 20), bg='light green')  # botão solicitação de validação 
 btn_fechar = tk.Button(root, text='FECHAR',
                     command=root.destroy, bg='red', font=('Arial', 15))  # botão para fechar janela
 fundo.place(x=0, relheight=1., relwidth=1.)

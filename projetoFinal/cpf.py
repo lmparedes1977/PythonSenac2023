@@ -36,7 +36,6 @@ class Cpf:
 
     def valida_cpf(self):
         """Testa cpf (dígitos verificadores 1 e 2)"""
-
         cpf_list = list(self.__cpf) # torna cpf em lista de strings
 
 
