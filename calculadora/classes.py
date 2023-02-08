@@ -10,21 +10,12 @@ class Calculadora:
     def __init__(self, calculo: str) -> None:
         self.registros = Arquivo()
         self.calculo = calculo
-        try:
-            self.dados = self.trata_calculo()
-            self.num1 = self.dados[0]
-            self.num2 = self.dados[2]
-            self.operacao = self.dados[1]
-            self.resultado = self.calcula()
-            self.registros.registra_sucesso(self.__str__())
-        except Exception as exc:
-            meu_dict = {'operacao': exc}
-            str(meu_dict)
-            abre_chave = '{'
-            fecha_chave = '}'
-            self.registros.registra_falha(
-                f'{abre_chave}"operacao": "{self.calculo}", {exc}, "data e hora": \
-                    "{time.strftime("%d/%m/%Y %H:%M:%S", time.gmtime(time.time() - 10800))}"{fecha_chave}')
+        self.dados = self.trata_calculo()
+        self.num1 = self.dados[0]
+        self.num2 = self.dados[2]
+        self.operacao = self.dados[1]
+        self.resultado = self.calcula()
+        self.registros.registra_sucesso(self.__str__())
 
     def calcula(self):
         """Identifica operação e chama função do cálculo"""
@@ -41,10 +32,8 @@ class Calculadora:
                 return self.potencia(self.num1, self.num2)
             else:
                 raise Exception('"erro": "operador inválido"')
-        except ZeroDivisionError as exc:
+        except ZeroDivisionError:
             print("Divisão por 0 inválida")
-            raise Exception(
-                '"erro":"não é possível dividir por zero"') from exc
 
     def soma(self, num1: int, num2: int):
         """Realiza somas"""
@@ -72,41 +61,30 @@ class Calculadora:
         """
         lista_parametros = self.calculo.split()
         if len(lista_parametros) != 3:
-            self.registros.registra_falha('parametros em excesso')
-
-        lista_parametros = self.split_calculo()
-        lista_parametros = self.str_p_int(lista_parametros)
-        return lista_parametros
-
-    def split_calculo(self):
-        """Desmembra operador e operandos"""
-        if len(self.calculo.split()) < 3:
-            raise Exception(
-                '"erro": "entrada sem espaços entre operação e operandos"')
-        return self.calculo.split()
-
-    def str_p_int(self, lista):
-        """Converte strings em inteiros"""
+            self.registros.registra_falha(str({"operacao": self.calcula(),
+                                               "erro": "entrada inválida (sem operador ou sem espaços)",
+                                               "data e hora": time.strftime("%d/%m/%Y %H:%M:%S", time.gmtime(time.time() - 10800))}))
+            raise Exception
         lst = []
         try:
-            lst.append(int(lista[0]))
-        except TypeError as exc:
-            raise Exception(
-                '"erro": "primeiro dígito inválido"') from exc
+            lst.append(int(lista_parametros[0]))
+        except TypeError:
+            self.registros.registra_falha(str({"operacao": self.calcula(),
+                                               "erro": "primeiro dígito inválido",
+                                               "data e hora": time.strftime("%d/%m/%Y %H:%M:%S", time.gmtime(time.time() - 10800))}))
         try:
-            lst.append(int(lista[2]))
-        except TypeError as exc:
-            raise Exception(
-                '"erro": "segundo dígito inválido"') from exc
-        lst.insert(1, lista[1])
-        return lst
+            lst.append(int(lista_parametros[2]))
+        except TypeError:
+            self.registros.registra_falha(str({"operacao": self.calcula(),
+                                               "erro": "segundo dígito inválido",
+                                               "data e hora": time.strftime("%d/%m/%Y %H:%M:%S", time.gmtime(time.time() - 10800))}))
+        lst.insert(1, lista_parametros[1])
+        return lista_parametros
 
     def __str__(self):
-        """Formata """
-        abre_chave = '{'
-        fecha_chave = '}'
-        return f'{abre_chave}"operacao": "{self.calculo}", "resultado": "{self.resultado}",\
-             "data e hora": "{time.strftime("%d/%m/%Y %H:%M:%S", time.gmtime(time.time() - 10800))}"{fecha_chave}'
+        """Formata objeto"""
+        return str({"operação": {self.calculo}, "resultado": {self.resultado},
+                    "data e hora": {time.strftime("%d/%m/%Y %H:%M:%S", time.gmtime(time.time() - 10800))}})
 
 
 class Arquivo:
@@ -126,6 +104,3 @@ class Arquivo:
         """Grava falha em arquivo"""
         with open(Arquivo.ARQ_FALHA, 'a', encoding='utf-8') as arq:
             arq.write(txt + '\n')
-
-
-conta = Calculadora('5 + e')
