@@ -9,31 +9,35 @@ class Calculadora:
 
     def __init__(self, calculo: str) -> None:
         self.registros = Arquivo()
-        self.calculo = calculo
-        self.dados = self.trata_calculo()
+        self.calculo = calculo   
+        self.dados = self.trata_calculo()     
         self.num1 = self.dados[0]
         self.num2 = self.dados[2]
-        self.operacao = self.dados[1]
+        self.operador = self.dados[1]        
         self.resultado = self.calcula()
         self.registros.registra_sucesso(self.__str__())
 
     def calcula(self):
-        """Identifica operação e chama função do cálculo"""
-        try:
-            if self.operacao == '+':
-                return self.soma(self.num1, self.num2)
-            elif self.operacao == '-':
-                return self.subtrai(self.num1, self.num2)
-            elif self.operacao == '*':
-                return self.multiplica(self.num1, self.num2)
-            elif self.operacao == '/':
+        """Identifica operação e chama função do cálculo"""        
+        if self.operador == '+':
+            return self.soma(self.num1, self.num2)
+        elif self.operador == '-':
+            return self.subtrai(self.num1, self.num2)
+        elif self.operador == '*':
+            return self.multiplica(self.num1, self.num2)        
+        elif self.operador == '**':
+            return self.potencia(self.num1, self.num2)
+        elif self.operador == '/':
+            try:
                 return self.divide(self.num1, self.num2)
-            elif self.operacao == '**':
-                return self.potencia(self.num1, self.num2)
-            else:
-                raise Exception('"erro": "operador inválido"')
-        except ZeroDivisionError:
-            print("Divisão por 0 inválida")
+            except ZeroDivisionError: 
+                self.registros.registra_falha("deu ruim")
+                print("divisão por zero")   
+        else:
+            self.registros.registra_falha("deu ruim")
+            print("operador inválido")  
+            
+        
 
     def soma(self, num1: int, num2: int):
         """Realiza somas"""
@@ -59,27 +63,26 @@ class Calculadora:
         """ Recebo chamada de cálculo e desemebra os parâmetros
             num1, num2 e operação
         """
-        lista_parametros = self.calculo.split()
+        lista_parametros = self.calculo.split()        
         if len(lista_parametros) != 3:
-            self.registros.registra_falha(str({"operacao": self.calcula(),
+            self.registros.registra_falha(str({"operacao": self.calculo,
                                                "erro": "entrada inválida (sem operador ou sem espaços)",
                                                "data e hora": time.strftime("%d/%m/%Y %H:%M:%S", time.gmtime(time.time() - 10800))}))
-            raise Exception
-        lst = []
+            
+        operador = lista_parametros[1]        
         try:
-            lst.append(int(lista_parametros[0]))
+            num1 = int(lista_parametros[0])
         except TypeError:
             self.registros.registra_falha(str({"operacao": self.calcula(),
                                                "erro": "primeiro dígito inválido",
                                                "data e hora": time.strftime("%d/%m/%Y %H:%M:%S", time.gmtime(time.time() - 10800))}))
         try:
-            lst.append(int(lista_parametros[2]))
+            num2 = int(lista_parametros[2])
         except TypeError:
             self.registros.registra_falha(str({"operacao": self.calcula(),
                                                "erro": "segundo dígito inválido",
                                                "data e hora": time.strftime("%d/%m/%Y %H:%M:%S", time.gmtime(time.time() - 10800))}))
-        lst.insert(1, lista_parametros[1])
-        return lista_parametros
+        return [num1, operador, num2]
 
     def __str__(self):
         """Formata objeto"""

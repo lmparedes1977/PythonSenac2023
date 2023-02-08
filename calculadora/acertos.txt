@@ -4,3 +4,6 @@
 {"operacao": "5 - 3", "resultado": "2", "data e hora": "07/02/2023 21:13:19"}
 {"operacao": "9 / 3", "resultado": "3.0", "data e hora": "07/02/2023 21:13:58"}
 {"operacao": "1 * 4", "resultado": "4", "data e hora": "07/02/2023 21:29:33"}
+{'operação': {'5 * 5'}, 'resultado': {None}, 'data e hora': {'08/02/2023 10:53:38'}}
+{'operação': {'5 * 5'}, 'resultado': {25}, 'data e hora': {'08/02/2023 11:00:47'}}
+{'operação': {'5 / 0'}, 'resultado': {None}, 'data e hora': {'08/02/2023 11:00:56'}}

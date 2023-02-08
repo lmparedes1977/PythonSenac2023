@@ -15,3 +15,5 @@
 {"operacao": "5 + e", invalid literal for int() with base 10: 'e', "data e hora": "07/02/2023 21:13:47"}
 {"operacao": "4 d", "erro": "entrada sem espaços entre operação e operandos", "data e hora": "07/02/2023 21:14:06"}
 {"operacao": "meu nome é b", invalid literal for int() with base 10: 'meu', "data e hora": "07/02/2023 21:29:43"}
+deu ruim
+deu ruim
